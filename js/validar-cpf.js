@@ -1,13 +1,11 @@
 export default function validarCPF(campo) {
     const cpf = campo.value.replace(/\.|-/g, "");
-    if (validarNumerosRepetidos(cpf) || validarPrimeiroDigito(cpf) || validarSegundoDigito(cpf)) {
-        console.log("CPF não existe");
-    } else {
-        console.log("CPF Existe");
+    if (ehNumerosRepetidos(cpf) || validarPrimeiroDigito(cpf) || validarSegundoDigito(cpf)) {
+        campo.setCustomValidity("O CPF não existe");
     }
 }
 
-function validarNumerosRepetidos(cpf) {
+function ehNumerosRepetidos(cpf) {
     const numerosRepetidos = [
         "00000000000",
         "11111111111",
