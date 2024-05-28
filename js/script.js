@@ -2,6 +2,7 @@ import validarCPF from "./validar-cpf.js";
 import validarIdade from "./validar-idade.js";
 
 const camposFormulario = document.querySelectorAll("[required]");
+const formulario = document.querySelector("[data-formulario]");
 const tiposDeErro = ["valueMissing", "typeMismatch", "patternMismatch", "tooShort", "customError"];
 const mensagens = {
     nome: {
@@ -37,6 +38,20 @@ const mensagens = {
 camposFormulario.forEach((campo) => {
     campo.addEventListener("blur", () => verificarCampo(campo));
     campo.addEventListener("invalid", (evento) => evento.preventDefault());
+});
+
+formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    const listaRespostas = {
+        nome: evento.target.elements["nome"].value,
+        email: evento.target.elements["email"].value,
+        rg: evento.target.elements["rg"].value,
+        cpf: evento.target.elements["cpf"].value,
+        aniversario: evento.target.elements["aniversario"].value,
+    };
+    localStorage.setItem("cadastro", JSON.stringify(listaRespostas));
+    window.location.href = "../pages/abrir-conta-form-2.html";
 });
 
 function verificarCampo(campo) {
